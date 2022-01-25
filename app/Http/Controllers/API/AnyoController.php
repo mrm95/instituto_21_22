@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Resources\AnyoResource;
-use App\Models\anyo_escolar;
+use App\Models\anyos_escolares;
 
 class AnyoController extends Controller
 {
@@ -16,7 +16,7 @@ class AnyoController extends Controller
      */
     public function index()
     {
-        return AnyoResource::collection(anyo_escolar::paginate());
+        return AnyoResource::collection(anyos_escolares::paginate());
     }
 
     /**
@@ -30,7 +30,7 @@ class AnyoController extends Controller
 
         $Anyo = json_decode($request->getContent(), true);
 
-        $Anyo = anyo_escolar::create($Anyo);
+        $Anyo = anyos_escolares::create($Anyo);
 
         return new AnyoResource($Anyo);
     }
@@ -41,7 +41,7 @@ class AnyoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(anyo_escolar $Anyo)
+    public function show(anyos_escolares $Anyo)
     {
         return new AnyoResource($Anyo);
     }
@@ -53,7 +53,7 @@ class AnyoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, anyo_escolar $Anyo)
+    public function update(Request $request, anyos_escolares $Anyo)
     {
         $AnyoData = json_decode($request->getContent(), true);
         $Anyo->update($AnyoData);
@@ -67,7 +67,7 @@ class AnyoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(anyo_escolar $Anyo)
+    public function destroy(anyos_escolares $Anyo)
     {
         $Anyo->delete();
     }

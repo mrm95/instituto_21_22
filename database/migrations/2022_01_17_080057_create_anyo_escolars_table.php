@@ -13,7 +13,7 @@ class CreateAnyoEscolarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('anyo_escolars', function (Blueprint $table) {
+        Schema::create('anyos_escolares', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fechainicio')->nullable();
             $table->dateTime('fechafinal')->nullable();

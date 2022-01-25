@@ -27,7 +27,10 @@ Route::apiResource('niveles', NivelController::class)
     'niveles' => 'nivel'
 ]);
 
-Route::apiResource('anyo_escolars', AnyoController::class);
+Route::apiResource('anyos_escolares', AnyoController::class)
+->parameters([
+    'anyos_escolares' => 'anyo_escolar'
+]);
 
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
