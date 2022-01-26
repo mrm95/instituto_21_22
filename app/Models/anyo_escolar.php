@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class anyos_escolares extends Model
+class anyo_escolar extends Model
 {
+    public $table = "anyos_escolares";
     use HasFactory;
 
     protected $fillable = [

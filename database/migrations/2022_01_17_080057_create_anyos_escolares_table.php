@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnyoEscolarsTable extends Migration
+class CreateAnyosEscolaresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -29,6 +29,6 @@ class CreateAnyoEscolarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anyo_escolars');
+        Schema::dropIfExists('anyos_escolares');
     }
 }
