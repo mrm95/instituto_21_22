@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
-Route::apiResource('centros', CentroController::class);
+Route::apiResource('centros', CentroController::class)->middleware('auth:sanctum');
 
 Route::apiResource('niveles', NivelController::class)
 ->parameters([
@@ -49,6 +49,9 @@ Route::post('/tokens/create', function (Request $request) {
     ]);
 });
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $config = new Config([
         'address' => env('DB_HOST', '127.0.0.1'),

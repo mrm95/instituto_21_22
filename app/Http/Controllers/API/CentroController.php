@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Centro;
@@ -19,19 +20,19 @@ class CentroController extends Controller
         return CentroResource::collection(Centro::paginate());
     }
 
-    /**
-     * Store a newly created resource in storage.
+      /**
+     * Crea un centro.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $centro = json_decode($request->getContent(), true);
+        if ($request->user()->cannot('create', Centro::class)) {
+            abort(403);
+        }
 
-        $centro = Centro::create($centro);
-
-        return new CentroResource($centro);
+        // Create el centro...
     }
 
     /**
@@ -45,19 +46,21 @@ class CentroController extends Controller
         return new CentroResource($centro);
     }
 
-    /**
-     * Update the specified resource in storage.
+   /**
+     * Actualiza el centro.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Centro  $centro
      * @return \Illuminate\Http\Response
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Centro $centro)
     {
-        $centroData = json_decode($request->getContent(), true);
-        $centro->update($centroData);
+        $this->authorize('update', $centro);
 
-        return new CentroResource($centro);
+        // El usuario autenticado puede actualizar el centro...
+    }
     }
 
     /**
