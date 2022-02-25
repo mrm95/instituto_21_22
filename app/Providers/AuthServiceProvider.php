@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+<<<<<<< HEAD
 use App\Models\Centro;
 use App\Models\User;
 use App\Policies\CentroPolicy;
@@ -14,6 +15,11 @@ use App\Policies\CentroPolicy;
  * @return void
  */
 
+=======
+use App\Policies\CentroPolicy;
+use App\Models\Centro;
+use App\Models\User;
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +29,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+<<<<<<< HEAD
+=======
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
         Centro::class => CentroPolicy::class,
     ];
     /**
@@ -33,9 +43,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+<<<<<<< HEAD
 
         Gate::define('update-centro', function (User $user, Centro $centro) {
             return $user->id === $centro->coordinador;
         });
+=======
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
     }
 }

@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nivel extends Model
+class Grupo extends Model
 {
     use HasFactory;
-    protected $table = 'niveles';
 
     protected $fillable = [
+        'curso',
+        'letra',
         'nombre',
-        'nivel_superior'
+        'tutor',
+        'anyoescolar',
+        'nivel',
+        'verificado',
+        'creador'
     ];
-
-    public function grupos() {
-        return $this->hasMany(Grupo::class, 'nivel');
-    }
 }

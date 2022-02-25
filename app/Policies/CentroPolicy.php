@@ -11,6 +11,22 @@ class CentroPolicy
     use HandlesAuthorization;
 
     /**
+<<<<<<< HEAD
+=======
+     * Perform pre-authorization checks.
+     *
+     * @param  \App\Models\User  $user
+     * @param  string  $ability
+     * @return void|bool
+     */
+    public function before(User $user, $ability)
+    {
+        if ($user->isAdministrator()) {
+            return true;
+        }
+    }
+    /**
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
@@ -18,7 +34,11 @@ class CentroPolicy
      */
     public function viewAny(User $user)
     {
+<<<<<<< HEAD
         //
+=======
+        return $user->id == 10; // un ejemplo de autorización a un usuario concreto.
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
     }
 
     /**
@@ -30,6 +50,7 @@ class CentroPolicy
      */
     public function view(User $user, Centro $centro)
     {
+<<<<<<< HEAD
         //
     }
 
@@ -42,6 +63,20 @@ class CentroPolicy
     public function create(User $user)
     {
         return $user->role == 'administrador';
+=======
+        return true;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function create(User $user)
+    {
+        return true; //$user->id == 1; // 'administrador';
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
     }
 
     /**
@@ -53,7 +88,16 @@ class CentroPolicy
      */
     public function update(User $user, Centro $centro)
     {
+<<<<<<< HEAD
         return $user->id === $centro->coordinador;
+=======
+        if (($centroCoordinado = $user->centroCoordinado) &&
+        $centro->id == $centroCoordinado->id) {
+            return true;
+        } else {
+            return false;
+        }
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
     }
 
     /**
@@ -65,7 +109,17 @@ class CentroPolicy
      */
     public function delete(User $user, Centro $centro)
     {
+<<<<<<< HEAD
         //
+=======
+
+        if (($centroCoordinado = $user->centroCoordinado) &&
+        $centro->id == $centroCoordinado->id) {
+            return true;
+        } else {
+            return false;
+        }
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
     }
 
     /**
@@ -91,6 +145,7 @@ class CentroPolicy
     {
         //
     }
+<<<<<<< HEAD
     /**
  * Perform pre-authorization checks.
  *
@@ -104,4 +159,6 @@ public function before(User $user, $ability)
         return true;
     }
 }
+=======
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
 }

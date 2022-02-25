@@ -2,6 +2,22 @@
 
 use App\Http\Controllers\API\CentroController;
 use App\Http\Controllers\API\NivelController;
+
+
+
+use App\Http\Controllers\API\falta_profesorController;
+
+
+
+use App\Http\Controllers\API\GrupoController;
+use App\Http\Controllers\API\TutorizadoController;
+
+use App\Http\Controllers\API\MateriaController;
+
+use App\Http\Controllers\API\MatriculaController;
+use App\Http\Controllers\API\PeriodoLectivoController;
+use App\Http\Controllers\API\MateriaMatriculadaController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,13 +38,44 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
+<<<<<<< HEAD
 Route::apiResource('centros', CentroController::class)->middleware('auth:sanctum');
+=======
+Route::post('tokens/create', function (Request $request) {
+     $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    return response()->json([
+        'token_type' => 'Bearer',
+        'access_token' => $user->createToken('token_name')->plainTextToken // token name you can choose for your self or leave blank if you like to
+    ]);
+})->name('login');
+
+// Route::get('centros/indexOD', [CentroController::class, 'indexOD'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->
+    apiResource('centros', CentroController::class)
+;
+
+Route::apiResource('matriculas', MatriculaController::class);
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
 
 Route::apiResource('niveles', NivelController::class)
 ->parameters([
     'niveles' => 'nivel'
 ]);
 
+<<<<<<< HEAD
 Route::post('/tokens/create', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
@@ -48,10 +95,38 @@ Route::post('/tokens/create', function (Request $request) {
         'access_token' => $user->createToken('token_name')->plainTextToken // token name you can choose for your self or leave blank if you like to
     ]);
 });
+=======
+
+
+Route::apiResource('faltas_profesores', falta_profesorController::class)
+->parameters([
+    'faltas_profesores' => 'falta_profesor'
+]);
+
+Route::middleware('auth:sanctum')->
+    apiResource('grupos', GrupoController::class);
+
+Route::apiResource('tutorizados', TutorizadoController::class);
+
+
+
+Route::apiResource('materias', MateriaController::class);
+
+Route::apiResource('periodosLectivos', PeriodoLectivoController::class);
+Route::apiResource('materiasmatriculadas', MateriaMatriculadaController::class)
+->parameters([
+    'materiasmatriculadas' => 'materiaMatriculada'
+
+]);
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $config = new Config([
         'address' => env('DB_HOST', '127.0.0.1'),
@@ -65,8 +140,11 @@ Route::any('/{any}', function (ServerRequestInterface $request) {
     return $response;
 })->where('any', '.*');
 
+<<<<<<< HEAD
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
+=======
+>>>>>>> dd4f6ffaea26659a4dbccb8c93733a1cefe849ec
